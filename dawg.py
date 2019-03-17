@@ -32,9 +32,10 @@ class DawgNode:
         else:
             arr.append('0')
 
-        for label, node in self.edges.items():
+        for label in self.edges:
+            child = self.edges[label]
             arr.append(label)
-            arr.append(str(node._id))
+            arr.append(str(child._id))
 
         return '_'.join(arr)
 
@@ -55,8 +56,9 @@ class DawgNode:
         count = 0
         if self.final:
             count += 1
-        for label, node in self.edges.items():
-            count += node.count
+        for label in self.edges:
+            child = self.edges[label]
+            count += child.count
 
         self._count = count
         return count
@@ -161,6 +163,7 @@ class Dawg:
                 continue
             done.add(node._id)
             print('{}: ({})'.format(node._id, node))
-            for label, child in node.edges.items():
+            for label in node.edges:
+                child = node.edges[label]
                 print('    {} goto {}'.format(label, child._id))
                 stack.append(child)
