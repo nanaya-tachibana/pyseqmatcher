@@ -80,21 +80,12 @@ class SparseLevenshteinAutomaton:
         return state.get(len(self._str) - 1, self._d + 1) <= self._d
 
 
-def levenshtein_distance(from_str, to_str, insert_cost=None,
+def levenshtein_distance(from_str, to_str,
+                         max_cost=1, insert_cost=None,
                          delete_cost=None, replace_cost=None):
     """
     Return the levenshtein distance of transforming from_str to to_str.
     """
-    if insert_cost is None or delete_cost is None or replace_cost is None:
-        max_cost = 1
-    else:
-        max_cost = 1
-    if insert_cost is not None:
-        max_cost = max(max(insert_cost.values()), max_cost)
-    if delete_cost is not None:
-        max_cost = max(max(delete_cost.values()), max_cost)
-    if replace_cost is not None:
-        max_cost = max(max(replace_cost.values()), max_cost)
     lev_auto = SparseLevenshteinAutomaton(
         from_str, (len(from_str) + len(to_str)) * max_cost,
         insert_cost=insert_cost, delete_cost=delete_cost,
