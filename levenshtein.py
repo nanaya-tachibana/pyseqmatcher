@@ -119,7 +119,7 @@ def levenshtein_search(graph, query_str, max_distance,
             new_word = ''.join([word, char])
             child = node.edges[char]
             if lev_auto.is_match(new_state) and child.final:
-                matched.add(new_word)
+                matched.add((new_state[len(lev_auto._str) - 1], new_word))
             if lev_auto.can_match(new_state):
                 stack.append((new_word, child, new_state))
     return matched
