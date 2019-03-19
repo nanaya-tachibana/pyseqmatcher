@@ -1,7 +1,7 @@
 import types
 import collections
 
-from dawg import Dawg
+from .dawg import Dawg
 
 
 class SparseLevenshteinAutomaton:
